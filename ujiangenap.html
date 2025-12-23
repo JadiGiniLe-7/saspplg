@@ -1,0 +1,94 @@
+<html>
+<head>
+<title>PROYEK UJIAN PPLG</title>
+</head>
+<body>
+
+<script>
+let jumlahTransaksi = 2;
+let transaksi = [];
+let totalTransaksi = 0;
+let totalDiskon = 0;
+let totalBayar = 0; 
+
+for (let i = 1; i <= jumlahTransaksi; i++) {
+	console.log(`\n === Transaksi ke-${i} ===`);
+	
+	//Prompt input
+	let nama = prompt(`Pembeli ke-${i}\nMasukkan Nama:`);
+	let  jenisBaju = prompt('\nMasukkan Jenis Baju:');
+	let hargaSatuan = prompt('\nMasukkan Harga Satuan');
+	let jumlahBaju = parseInt(prompt('\nMasukkan Jumlah Baju:'));
+	let sesiPembelian = prompt('\nMasukkan Sesi Pembelian:');
+	
+	let dataTransaksi = {
+		nama: nama,
+		jenisBaju: jenisBaju,
+		hargaSatuan: hargaSatuan,
+		jumlahBaju: jumlahBaju,
+		sesiPembelian: sesiPembelian,
+		totalBayar: totalBayar
+	};
+	transaksi.push(dataTransaksi);
+	
+	let totalHargaTransaksi = hargaSatuan * jumlahBaju;
+	
+	if (sesiPembelian == "Pagi") {
+		if (jumlahBaju <= 10) {
+			let diskon10pertama = 0;
+		} else if (jumlahBaju >= 11 && jumlahBaju <= 20) {
+			diskon10pertama = totalHargaTransaksi * 0.05;
+			sisaDiskon = totalHargaTransaksi * 0.1;
+		} else {
+			diskon10pertama = totalHargaTransaksi * 0.05;
+			let sisaBaju = jumlahBaju - 10;
+			diskon10Kedua = sisaBaju * hargaSatuan * 0.12;
+			sisaBaju2 = sisaBaju - 10;
+			sisaDiskon = sisaBaju2 * hargaSatuan * 0.22;
+		}
+	
+	} else if (sesiPembelian == "Malam") {
+		if (jumlahBaju <= 10) {
+			diskon10pertama = totalHargaTransaksi * 0.05;
+		} else if (jumlahBaju >= 11 && jumlahBaju <= 20) {
+			diskon10pertama = totalHargaTransaksi * 0.10;
+			sisaDiskon = totalHargaTransaksi * 0.18;
+		} else {
+			diskon10pertama = totalHargaTransaksi * 0.15;
+			sisaBaju = jumlahBaju - 10;
+			diskon10Kedua = sisaBaju * hargaSatuan * 0.25;
+			sisaBaju2 = sisaBaju - 10;
+			sisaDiskon = sisaBaju2 * hargaSatuan * 0.35;
+		}
+	} else {
+		diskon10pertama = 0;
+		diskon10Kedua = 0;
+		sisaDiskon = 0;
+	}
+	
+	totalDiskon = diskon10pertama + diskon10Kedua + sisaDiskon
+	totalBayar = totalHargaTransaksi - totalDiskon;
+	
+	console.log(`Nama: ${nama}`);
+	console.log(`Jenis Baju: ${jenisBaju}`);
+	console.log(`Harga Satuan: ${hargaSatuan}`);
+	console.log(`Jumlah Baju Dibeli: ${jumlahBaju}`);
+	console.log(`Sesi Pembelian: ${sesiPembelian}`);
+	console.log(`Jenis Baju: ${jenisBaju}`);
+	console.log(`Sesi: ${sesiPembelian}`);
+	console.log(`Total Harga: Rp ${totalHargaTransaksi}`);
+	console.log(`Diskon: Rp ${totalDiskon}`);
+	console.log(`Total Bayar: Rp ${totalBayar}`);
+}
+
+console.log('\n=== REKAP AKHIR PENJUALAN ===');
+console.log(`Total Transaksi: ${jumlahTransaksi}`);
+console.log(`Total Diskon: Rp ${totalDiskon}`);
+let totalPendapatan = transaksi.reduce((sum, p) => sum + p.totalBayar, 0);
+let rataPendapatan = totalPendapatan / 2;
+console.log(`Total Pendapatan: Rp ${totalPendapatan}`);
+console.log(`Rata-rata Pendapatan per Transaksi: Rp ${rataPendapatan}`);
+</script>
+
+</body>
+</html>
